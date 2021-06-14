@@ -9,7 +9,7 @@
 <body>
 <br>
   <div class="container">
-      <button class="btn2" onclick="document.getElementById('id01').style.display='block'">Logi</button>
+      <button class="btn2" onclick="document.getElementById('id01').style.display='block'">Login</button>
             <button class="btn1" onclick="document.getElementById('id02').style.display='block'">Sign Up</button>
   </div>
 
