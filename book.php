@@ -11,13 +11,26 @@ $username=$_SESSION['username'];
 
 if(isset($_POST['submit'])){
          $vdate = mysqli_real_escape_string($conn, $_REQUEST['vdate']);
-        
-         $visit_date = date("Y-d-m", strtotime($vdate));    
+         $visit_date=date_create($vdate);
+         date_format($visit_date,"d-m-Y");
+         $datetime1 = date_create($vdate);
 
-         $currentDateTime = date('Y-m-d');
+         $date = date("d-m-Y");
+         //echo $date;
+         $datetime2 = date_create($date);
+  
+        $interval = date_diff($datetime1, $datetime2);
 
-         if($visit_date < $currentDateTime)
+        $diff = $interval->format('%R%a');
+
+        if (is_numeric($diff))
+              $number = $diff + 0;
+        else // Let the number be 0 if the string is not a number
+      $number = 0;
+
+        if($diff > 0)
             echo '<script>alert("Enter a valid date of visit")</script>';
+
           else{
             $_SESSION['vdate'] = $vdate;
             header('location:book_slot.php');
@@ -56,9 +69,9 @@ mysqli_close($conn);
 
 
         <div class="form-group">
-          <label for="vdate"><b style="font-size: 20px;">Date of Visit</b> (dd/mm/yyyy):</label><br>
-            <input type="text" id="vdate" name="vdate" placeholder="dd/mm/yyyy" required=" " 
-            pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"><br><br>
+          <label for="vdate"><b style="font-size: 20px;">Date of Visit</b> (yyyy-mm-dd):</label><br>
+            <input type="text" id="vdate" name="vdate" placeholder="yyyy-mm-dd" required=" " 
+            pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"><br><br>
         </div>
 <br>
         <center><input type="submit" name="submit" id="btn" class="button1" value="Continue"></center>
