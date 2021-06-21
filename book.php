@@ -70,8 +70,7 @@ mysqli_close($conn);
 
         <div class="form-group">
           <label for="vdate"><b style="font-size: 20px;">Date of Visit</b> (yyyy-mm-dd):</label><br>
-            <input type="text" id="vdate" name="vdate" placeholder="yyyy-mm-dd" required=" " 
-            pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"><br><br>
+            <input type="date" id="vdate" name="vdate" min="<?php echo date('Y-m-d');?>" max="<?php echo date('Y-m-d',strtotime('+10 day'));?>" required=" " ><br><br>
         </div>
 <br>
         <center><input type="submit" name="submit" id="btn" class="button1" value="Continue"></center>
